@@ -1,35 +1,59 @@
 # AutomationTesting-API-Mentutor
-- Deskripsi Project.
-Berisikan testing manual dan automation dari  API dan Website dari aplikasi Mentutor
+</div>
 
-"Mentutor hadir sebagai wadah untuk pengajar bisa memonitoring peserta didiknya baik dari pengumpulan tugas maupun dengan cara berdiskusi dengan peserta didik melalui forum yang disediakan"
+## About MENTUTOR APP
+"Mentutor is present as a place for teachers to monitor their students both from collecting assignments and by discussing with students through the available forums"
 
-- Link Test Case Manual.
-API Mentutor:
-https://docs.google.com/spreadsheets/u/1/d/1-UBcJ7PRdc6-rwiqy2UvnuceNfAs9-zzEyxWAIcFA8Y/edit?usp=drive_web&ouid=108696954977478789264
-WEB Mentutor:
-https://docs.google.com/spreadsheets/u/1/d/112BTHzntiOeodGzL3cI8p_8gOUZZBaHNsRkt0Kauexw/edit?usp=drive_web&ouid=108696954977478789264
 
-- Gambar Report Test Overall.
+## Link Test Case Manual.
+<div>
+<a href="https://docs.google.com/spreadsheets/d/1-UBcJ7PRdc6-rwiqy2UvnuceNfAs9-zzEyxWAIcFA8Y/edit#gid=1081421487" target="blank"><img src="https://img.shields.io/badge/-Test%20Scenario-181717?style=for-the-badge&logo=microsoft-excel&color=121B4F&logoColor=white" /></a>
+<a href="https://docs.google.com/presentation/d/1nPFZad7D1vlXkHDafPNE7DXlvN22LFyRdqorhA2auXo/edit#slide=id.p1" target="blank"><img src="https://img.shields.io/badge/-Presentation%20MentutorApp-181717?style=for-the-badge&logo=microsoft-PowerPoint&color=121B4F&logoColor=white" /></a>
+<a href="https://app.swaggerhub.com/apis-docs/NURFATUROHMAN28/Mentutor/1.0.0#/" target="blank"><img src="https://img.shields.io/badge/-API%20Documentation-181717?style=for-the-badge&logo=swagger&color=121B4F&logoColor=white" /></a>
 
-- Gambar Coverage Tiap Fitur (jika ada).
 
-- Tools & Technology Stack.
-Manual Testing
-Automation Testing
-Test Case Management
-Management Project
+## Report Test Overall.
 
-- How To Run Project.
+
+## Coverage Every Features (optional).
+
+</div>
+## Tools & Technology Stack.
+<div>
+<p>Manual Testing</p>
+      <a><img src="https://img.shields.io/badge/-Postman-181717?style=for-the-badge&logo=postman&color=121B4F&logoColor=white"></a>
+      <p>Test Case Management</p>
+      <a><img src="https://img.shields.io/badge/-Google%20Spreadsheet-181717?style=for-the-badge&logo=GoogleChrome&color=121B4F&logoColor=white"></a>
+      <p>Automation Testing</p>
+      <img src="https://img.shields.io/badge/-java-181717?style=for-the-badge&logo=java&color=121B4F">
+      <img src="https://img.shields.io/badge/-Apache%20Maven-181717?style=for-the-badge&logo=Apache%20Maven&color=121B4F&logoColor=white">
+      <img src="https://img.shields.io/badge/-cucumber-181717?style=for-the-badge&logo=cucumber&color=121B4F&logoColor=white">
+      <img src="https://img.shields.io/badge/-Rest%20Assured-181717?style=for-the-badge&logo=rest-assured&color=121B4F&logoColor=white">
+      <!-- <img src="https://img.shields.io/badge/-serenity bdd-181717?style=for-the-badge&logo=serenitybdd&color=121B4F&logoColor=white"> -->
+      <img src="https://img.shields.io/badge/-IntelliJ IDEA-181717?style=for-the-badge&logo=intellij-idea&color=121B4F">
+      <img src="https://img.shields.io/badge/-Gherkin-181717?style=for-the-badge&logo=gherkin&color=121B4F">
+      <p>Management Project</p>
+      <img src="https://img.shields.io/badge/-Trello-181717?style=for-the-badge&logo=trello&color=121B4F">
+</div>
+
+
+## How To Run Project.
 1. Clone use link below
-2. Go to directory
-3. Run the project
-4. You good to go!
+```
+$ git clone https://github.com/TimC-Mentutor/AutomationTesting-API-Mentutor.git
+```
+3. Go to directory
+```
+$ cd API-Mentutor
+```
+5. Run the project
+```
+$ mvn clean verify
+```
+7. You good to go!
+</div>
 
-- Team Member.
-Alfian Septy Chandra
-linkgithub
-Binti Nayla Wafiroh
-linkgithub
-Izzuddin Faruqi
-linkgithub
+## Team C Member :
+* [Alfian Septy Chandra](https://github.com/Ryouta021) <br> [![GitHub](https://img.shields.io/badge/alfiansepty-chandra-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alfianadityads)
+* [Binti Nayla Wafiroh](https://github.com/inaylalala) <br> [![GitHub](https://img.shields.io/badge/bintinayla-wafiroh-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/faruqiizu)
+* [Izzuddin Faruqi](https://github.com/faruqiizu) <br> [![GitHub](https://img.shields.io/badge/izzuddin-faruqi-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fathiyahrr)
