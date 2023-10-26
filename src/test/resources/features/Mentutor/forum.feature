@@ -1,4 +1,5 @@
 Feature:
+
   @GETALLSTATUS
   Scenario: Get all Status with valid path
     Given The right authentication
@@ -28,8 +29,8 @@ Feature:
       | caption          | images          |
       | ini adalah forum | gambarForum.png |
 
-  Scenario :  Post with forum with no image
-    Given The right authentication
-    And Post with forum with no imagae form data "ini form tanpa gambar" as caption and "" as images
-    When Send request post forum with valid form data
-    Then Status code forum should be 201 created
+ Scenario: Post With no images
+   Given The right authentication
+   And Post on forum with just caption "ini forum tanpa gambar"
+   When Send request post forum with just caption
+   Then Status code forum should be 201 created

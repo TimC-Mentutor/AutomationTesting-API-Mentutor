@@ -99,10 +99,13 @@ public class ForumStepDef {
         SerenityRest.then().statusCode(created);
     }
 //CASE 5
+    @And("Post on forum with just caption {string}")
+    public void postOnForumWithJustCaption(String caption) {
+        forumMentutorAPI.postForumTanpaGambar(caption);
+    }
 
-    @And("Post with forum with no imagae form data {string} as caption and {string} as images")
-    public void postWithForumWithNoImagaeFormDataAsCaption(String caption, String images) {
-        File imageFile = new File(ConstantForum.IMAGES + images);
-        forumMentutorAPI.postForum(imageFile, caption);
+    @When("Send request post forum with just caption")
+    public void sendRequestPostForumWithJustCaption() {
+        SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
     }
 }
