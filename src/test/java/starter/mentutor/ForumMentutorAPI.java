@@ -34,4 +34,17 @@ public class ForumMentutorAPI extends TokenMentee {
                 .contentType("multipart/form-data")
                 .multiPart("caption",caption);
     }
+    @Step("POST Forum Tanpa caption")
+    public void postForumTanpaCaption(File imageFile) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + getToken())
+                .contentType("multipart/form-data")
+                .multiPart("images",imageFile);
+    }
+    @Step("POST Forum dengan json")
+    public void postForumDenganJson(File jsonFile) {
+        SerenityRest.given()
+                .contentType(ContentType.JSON)
+                .body(jsonFile);
+    }
 }

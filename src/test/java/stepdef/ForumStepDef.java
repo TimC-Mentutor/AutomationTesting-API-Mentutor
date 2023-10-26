@@ -108,4 +108,35 @@ public class ForumStepDef {
     public void sendRequestPostForumWithJustCaption() {
         SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
     }
+//CASE 6
+    @And("Post on forum with just images {string} as images")
+    public void postOnForumWithJustImagesAsImages( String images) {
+        File image = new File(ConstantForum.IMAGES+images);
+        forumMentutorAPI.postForumTanpaCaption(image);
+    }
+    @When("Send request post forum with just images")
+    public void sendRequestPostForumWithJustImages() {
+        SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
+    }
+    @Then("Status code forum should be {int} bad request")
+    public void statusCodeForumShouldBeBadRequest(int badRequest) {
+        SerenityRest.then().statusCode(badRequest);
+    }
+
+//CASE 7
+    @When("Send request post forum with less than five character on a caption")
+    public void sendRequestPostForumWithLessThanFiveCharacterOnACaption() {
+        SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
+    }
+//CASE 8
+    @And("Post forum with {string} as json body")
+    public void postForumWithAsJsonBody(String jsonFile) {
+        File json = new File(ConstantForum.REQ_BODY+jsonFile);
+        forumMentutorAPI.postForumDenganJson(json);
+    }
+
+    @When("Send request post forum with json as body")
+    public void sendRequestPostForumWithJsonAsBody() {
+        SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
+    }
 }
