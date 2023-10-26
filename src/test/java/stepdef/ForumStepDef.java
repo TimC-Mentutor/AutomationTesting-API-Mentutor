@@ -20,11 +20,14 @@ public class ForumStepDef {
     ForumMentutorAPI forumMentutorAPI;
 
 //CASE 1
-    @Given("I have a valid authentication token and valid path {string}")
-    public void iHaveValidAuthToken(String path) {
-        String authToken = ConstantForum.AUTH_TOKEN;
-        forumMentutorAPI.accessForumWithAuthToken(authToken,path);
+    @Given("The right authentication")
+    public void theRightAuthentication() {
+        forumMentutorAPI.login("loginMentee.json");
+    }
 
+    @And("I have a valid authentication token and valid path {string}")
+    public void iHaveValidAuthToken(String path) {
+        forumMentutorAPI.accessForumWithAuthToken(path);
     }
 
     @When("Send request get forum with valid path")
@@ -46,8 +49,8 @@ public class ForumStepDef {
 //CASE 2
     @Given("I have a valid authentication token and invalid path {string}")
     public void iHaveAValidAuthenticationTokenAndInvalidPath(String path) {
-        String authToken = ConstantForum.AUTH_TOKEN;
-        forumMentutorAPI.accessForumWithAuthToken(authToken,path);
+        forumMentutorAPI.login("loginMentee.json");
+        forumMentutorAPI.accessForumWithAuthToken(path);
     }
 
     @When("Send request get forum with invalid path")
@@ -76,5 +79,30 @@ public class ForumStepDef {
     @Then("Status code forum should be {int} method is not allowed")
     public void statusCodeForumShouldBeMethodIsNotAllowed(int notAllowed) {
         SerenityRest.then().statusCode(notAllowed);
+    }
+//CASE 4
+
+
+    @Given("Post with forum with valid form data {string} as caption and {string} as images")
+    public void postWithForumWithValidFormDataAsCaptionAndAsImages(String caption, String images) {
+    File imageFile = new File(ConstantForum.IMAGES + images);
+    forumMentutorAPI.postForum(imageFile, caption);
+}
+
+    @When("Send request post forum with valid form data")
+    public void sendRequestPostForumWithValidFormData() {
+        SerenityRest.when().post(forumMentutorAPI.POST_FORUM);
+    }
+
+    @Then("Status code forum should be {int} created")
+    public void statusCodeForumShouldBeCreated(int created) {
+        SerenityRest.then().statusCode(created);
+    }
+//CASE 5
+
+    @And("Post with forum with no imagae form data {string} as caption and {string} as images")
+    public void postWithForumWithNoImagaeFormDataAsCaption(String caption, String images) {
+        File imageFile = new File(ConstantForum.IMAGES + images);
+        forumMentutorAPI.postForum(imageFile, caption);
     }
 }
