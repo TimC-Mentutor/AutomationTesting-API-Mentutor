@@ -1,0 +1,70 @@
+-------------------------------------------------------------------------------
+Test set: mentor
+-------------------------------------------------------------------------------
+Tests run: 42, Failures: 11, Errors: 0, Skipped: 0, Time elapsed: 137.112 s <<< FAILURE! - in mentor
+mentor.Get all task  Time elapsed: 4.937 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <201>.
+
+
+mentor.Get all task with valid query param  Time elapsed: 4.493 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <201>.
+
+
+mentor.Get all task with invalid query param  Time elapsed: 2.318 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <201>.
+
+
+mentor.Get task detail with valid id  Time elapsed: 2.766 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <201>.
+
+
+mentor.Put update profile mentor without using space on field name  Time elapsed: 2.81 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <201> but was <400>.
+
+
+mentor.Put update profile mentor witohut using uppercase on field name  Time elapsed: 2.949 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <201> but was <400>.
+
+
+mentor.Put update profile mentor without input name,email,password  Time elapsed: 3.528 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <201>.
+
+
+mentor.Put update task with valid id and invalid due date #1  Time elapsed: 4.248 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <201>.
+
+
+mentor.Put update task with valid id and invalid due date #2  Time elapsed: 4.149 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <201>.
+
+
+mentor.Post with valid id and using integer on comment  Time elapsed: 2.015 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <201> but was <400>.
+
+
+mentor.Delete task with valid id  Time elapsed: 5.656 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <201>.
+
+

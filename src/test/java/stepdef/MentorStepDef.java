@@ -23,6 +23,7 @@ public class MentorStepDef {
 @Steps
 MentorMentutorApi mentorMentutorApi;
 String caption;
+int caption_int;
 int score_int;
 String score_str;
 String title;
@@ -317,6 +318,23 @@ String id_task_str;
                 .multiPart("images", imageFile)
                 .post(MentorMentutorApi.POST_ADD_TASK);
     }
+    @When("Send request mentor post task without input images")
+    public void sendRequestMentorPostTaskWithoutInputImages() {
+        File docsFile = new File(ConstantMentor.DOCS + this.file);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+mentorMentutorApi.getToken())
+                .contentType("multipart/form-data")
+                .multiPart("title", this.title)
+                .multiPart("description", this.description)
+                .multiPart("due_date",due_date)
+                .multiPart("file", docsFile)
+                .post(MentorMentutorApi.POST_ADD_TASK);
+    }
+
+
+
+
+
 //      --------- POST ADD COMMENTS ON STATUS---------
 
     @Given("Post with id {int} and valid caption {string}")
@@ -351,6 +369,21 @@ String id_task_str;
         mentorMentutorApi.login("MentorLogin.json");
         this.id_status_str= id_status_str;
         this.caption=caption;
+    }
+    @Given("Post with id {int} and valid caption {int}")
+    public void postWithIdAndValidCaption(int id_status, int caption) {
+        mentorMentutorApi.login("MentorLogin.json");
+        this.id_status= id_status;
+        this.caption_int=caption;
+    }
+
+    @When("Send request Post with valid id and integer on comment")
+    public void sendRequestPostWithValidIdAndIntegerOnComment() {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+mentorMentutorApi.getToken())
+                .pathParam("id status",this.id_status)
+                .contentType("multipart/form-data")
+                .post(MentorMentutorApi.POST_ADD_COMMENT);
     }
 
 //  -----------POST SUBMIT SCORE BY MENTOR----------
@@ -416,4 +449,7 @@ String id_task_str;
         mentorMentutorApi.login("MentorLogin.json");
         this.id_task_str=id_task;
     }
+
+
+
 }
