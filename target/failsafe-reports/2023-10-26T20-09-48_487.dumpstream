@@ -1,0 +1,4 @@
+# Created at 2023-10-26T20:09:49.246
+Boot Manifest-JAR contains absolute paths in classpath 'D:\AaaalterraAcademy\CAPSTONE PROJECT\AutomationTesting-API-Mentutor\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+

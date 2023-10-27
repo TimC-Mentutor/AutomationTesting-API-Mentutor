@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Get all task with valid query param</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" type="text/css" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" type="text/css" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+<!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.20/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.10.20/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.20/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.20/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- JQuery-UI -->
+<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
+<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.20/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.10.20/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.20/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.20/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<!-- ImgPreview -->
+<script src="scripts/imgpreview.full.jquery.js" type="text/javascript"></script>
+</head>
+
+<body class="results-page">
+
+
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">Serenity and Cucumber Quick Start</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+        <span class="breadcrumbs">
+            <a href="index.html" class="breadcrumbs">Home</a>
+
+            > <a href="d78259adda76d4741ae38b60df96efb28553aea1a00ad028761b66e428417a27.html">Mentutor</a>
+            > <a href="56770025e74ab5151b9947273017a5d7da4848931aa2146ea483693587fed400.html">Mentor</a>
+        > Get all task with valid query param
+        </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="fa fa-comments-o"></i> Capabilities</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated 26-10-2023 20:09</span>
+    <br style="clear:left"/>
+</div>
+    <div class="clr"></div>
+
+
+    <div id="contentbody">
+        <div class="titlebar">
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td>
+                                <div>
+                                    <h3 class="discreet-story-header">
+                                        <i class="fa fa-2x fa-comments-o"></i>
+                                        <span class="story-header-title">Mentor </span>
+                                    </h3>
+
+                                </div>
+
+                        </td>
+                        <td valign="top">
+                                <p class="tag">
+                                    <span class="badge tag-badge" style="background:default;">
+                                    <i class="fa fa-tag"></i>&nbsp;<a class="tagLink" style="background:default;"
+                                                                      href="113e0141dccb53164e57587a577a6685653bcc896c4eac0eae85092ac3e9d84c.html">MENTUTOR
+                                    (tag)</a>
+                                </span>
+                                </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td colspan="2" class="test-title-bar">
+                            <span class="outcome-icon"><a href='##beforetable'><i class='fa fa-times-circle failure-icon fa-2x' title='FAILURE'></i></a></span>
+                            <span class="test-case-title">
+                                <span class="failing-color">
+                                    Get all task with valid query param
+                                        <span class="related-issue-title"></span>
+                                </span>
+                            </span>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="clr"></div>
+
+
+    <div id="beforetable"></div>
+
+
+    <div id="tablecontents">
+        <div>
+            <table class="step-table">
+                <tr class="step-titles">
+                    <th width="65">
+                    </th>
+                    <th class="step-description-column greentext">
+                        Steps
+                    </th>
+
+                    <th width="130" class="greentext">Outcome</th>
+                    <th width="100" class="greentext"><i title="Duration" class="far fa-clock"></i></th>
+                </tr>
+                <tr class="step-table-separator">
+                    <td colspan="5"></td>
+                </tr>
+
+                    <tr class="test-SUCCESS">
+
+                        <td width="50" class="step-icon">
+                            <a name="0"></a>
+                                <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                                   style="display:block">
+                                    <i class="fa fa-plus-square-o imgstepSection0 success-icon"
+                                       style="margin-left: 20px; float:left; padding-right:5px"></i>
+                                </a>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                                   style="display:block;">
+                                    <span class="top-level-step">
+                                                Given get list user query params title "biologi"
+                                        </span>
+                                </a>
+                                <span class="evidence">
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                        <td width="100"><span class="top-level-step">2s 138ms</span></td>
+                    </tr>
+                        <tr>
+                            <td colspan="5">
+                                <table id="stepSection0" class="step-table-nested" style="display:none;">
+                    <tr class="test-SUCCESS">
+
+                        <td width="70" class="step-icon">
+                            <a name="0-0"></a>
+                                <span style="margin-left: 40px;"
+                                      class="nested-group-icon"><a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                    <span class="nested-group-step">
+                                                POST https://mentutor.altapro.online/login
+                                        </span>
+                                <span class="evidence">
+                                        <span class="piece-of-evidence">
+                    <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-2">
+                            REST Query
+                        </button>
+                    </span>
+                    <!-- Modal -->
+                    <div class="rest-query-details">
+                        <div class="collapse multi-collapse" id="restModal-REST-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Response</h4>
+                                        <p>URL: https://mentutor.altapro.online/login</p>
+                                        <p>Status code: 200</p>
+                                        <p>Content Type: application/json</p>
+                                        <h4>Request Headers</h4>
+                                        <pre>Accept=*/*<br>Content-Type=application/json; charset=UTF-8</pre>
+                                        <h4>Content Body</h4>
+                                        <pre>D:\AaaalterraAcademy\CAPSTONE PROJECT\AutomationTesting-API-Mentutor\src\test\resources\JSON\ReqBody\MentorLogin.json</pre>
+                                        <h4>Request Cookies</h4>
+                                        <pre></pre>
+                                        <h4>Response Headers</h4>
+                                        <pre>Date: Thu, 26 Oct 2023 13:09:57 GMT<br>Content-Type: application/json; charset=UTF-8<br>Transfer-Encoding: chunked<br>Connection: keep-alive<br>Vary: Origin<br>CF-Cache-Status: DYNAMIC<br>Report-To: {&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https:\/\/a.nel.cloudflare.com\/report\/v3?s=WWmKJ8xJvPiTnzh1aeTTeyWnxxvG%2FQycUypUSTtZwpTcBFnk9kmh7MSuA88%2BZdrWPNd3LEsW00C2nJEIEkzzecYOPOOuZeu70A3GeGiYOlgm%2BfvbaaJcziZXtUbtAxYroz3KoYsjoc7LGg%3D%3D&quot;}],&quot;group&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>NEL: {&quot;success_fraction&quot;:0,&quot;report_to&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>Server: cloudflare<br>CF-RAY: 81c2efc0dbae04f9-HKG<br>Content-Encoding: gzip<br>alt-svc: h3=&quot;:443&quot;; ma=86400</pre>
+                                    <h4>Response Body</h4>
+                                        <pre>{<br>    &quot;data&quot;: {<br>        &quot;id_user&quot;: 14,<br>        &quot;name&quot;: &quot;Amanda&quot;,<br>        &quot;email&quot;: &quot;amanda@gmail.com&quot;,<br>        &quot;id_class&quot;: 8,<br>        &quot;class_name&quot;: &quot;Matematika&quot;,<br>        &quot;role&quot;: &quot;mentor&quot;,<br>        &quot;images&quot;: &quot;&quot;,<br>        &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZENsYXNzIjo4LCJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTgzMzI5OTcsInJvbGUiOiJtZW50b3IiLCJ1c2VySWQiOjE0fQ.gkLyuhpjCPBoa0kb0uQjH6J0c8VZqLNZCvUXFThFDso&quot;,<br>        &quot;auth_gmail&quot;: &quot;&quot;<br>    },<br>    &quot;message&quot;: &quot;login successful&quot;<br>}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                        </span>
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                        <td width="100"><span class="nested-group-step">001ms</span></td>
+                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    <tr class="test-SUCCESS">
+
+                        <td width="50" class="step-icon">
+                            <a name="1"></a>
+                                <a href="javaScript:void(0)" onClick="toggleDiv('stepSection1')"
+                                   style="display:block">
+                                    <i class="fa fa-plus-square-o imgstepSection1 success-icon"
+                                       style="margin-left: 20px; float:left; padding-right:5px"></i>
+                                </a>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                <a href="javaScript:void(0)" onClick="toggleDiv('stepSection1')"
+                                   style="display:block;">
+                                    <span class="top-level-step">
+                                                When Send request Get list task with param
+                                        </span>
+                                </a>
+                                <span class="evidence">
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                        <td width="100"><span class="top-level-step">2s 337ms</span></td>
+                    </tr>
+                        <tr>
+                            <td colspan="5">
+                                <table id="stepSection1" class="step-table-nested" style="display:none;">
+                    <tr class="test-SUCCESS">
+
+                        <td width="70" class="step-icon">
+                            <a name="1-0"></a>
+                                <span style="margin-left: 40px;"
+                                      class="nested-group-icon"><a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                    <span class="nested-group-step">
+                                                POST https://mentutor.altapro.online/login
+                                        </span>
+                                <span class="evidence">
+                                        <span class="piece-of-evidence">
+                    <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-4">
+                            REST Query
+                        </button>
+                    </span>
+                    <!-- Modal -->
+                    <div class="rest-query-details">
+                        <div class="collapse multi-collapse" id="restModal-REST-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Response</h4>
+                                        <p>URL: https://mentutor.altapro.online/login</p>
+                                        <p>Status code: 200</p>
+                                        <p>Content Type: application/json</p>
+                                        <h4>Request Headers</h4>
+                                        <pre>Accept=*/*<br>Content-Type=application/json; charset=UTF-8</pre>
+                                        <h4>Content Body</h4>
+                                        <pre>D:\AaaalterraAcademy\CAPSTONE PROJECT\AutomationTesting-API-Mentutor\src\test\resources\JSON\ReqBody\MentorLogin.json</pre>
+                                        <h4>Request Cookies</h4>
+                                        <pre></pre>
+                                        <h4>Response Headers</h4>
+                                        <pre>Date: Thu, 26 Oct 2023 13:09:59 GMT<br>Content-Type: application/json; charset=UTF-8<br>Transfer-Encoding: chunked<br>Connection: keep-alive<br>Vary: Origin<br>CF-Cache-Status: DYNAMIC<br>Report-To: {&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https:\/\/a.nel.cloudflare.com\/report\/v3?s=TftDzNnguvY10m8oPoiKX%2BB7B%2BMuQ5eD8pC2rV6ePY2EPffGUXNMBvvRuj%2F76hp%2BbNo88UnmWk4XH4D%2Bo6gRjU%2BrPZ0UWX6vJeoNNKEL0i%2FsSGYNM9CechvIx3PE%2Fd7%2FUwhCQm8x2YIJgQ%3D%3D&quot;}],&quot;group&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>NEL: {&quot;success_fraction&quot;:0,&quot;report_to&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>Server: cloudflare<br>CF-RAY: 81c2efcb9f8f6e67-HKG<br>Content-Encoding: gzip<br>alt-svc: h3=&quot;:443&quot;; ma=86400</pre>
+                                    <h4>Response Body</h4>
+                                        <pre>{<br>    &quot;data&quot;: {<br>        &quot;id_user&quot;: 14,<br>        &quot;name&quot;: &quot;Amanda&quot;,<br>        &quot;email&quot;: &quot;amanda@gmail.com&quot;,<br>        &quot;id_class&quot;: 8,<br>        &quot;class_name&quot;: &quot;Matematika&quot;,<br>        &quot;role&quot;: &quot;mentor&quot;,<br>        &quot;images&quot;: &quot;&quot;,<br>        &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZENsYXNzIjo4LCJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTgzMzI5OTgsInJvbGUiOiJtZW50b3IiLCJ1c2VySWQiOjE0fQ.UsC_xCPSv8NbN0h5s1btr4X93kj2_wCK2VpD2n6taAs&quot;,<br>        &quot;auth_gmail&quot;: &quot;&quot;<br>    },<br>    &quot;message&quot;: &quot;login successful&quot;<br>}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                        </span>
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                        <td width="100"><span class="nested-group-step"></span></td>
+                    </tr>
+                    <tr class="test-SUCCESS">
+
+                        <td width="70" class="step-icon">
+                            <a name="1-1"></a>
+                                <span style="margin-left: 40px;"
+                                      class="nested-group-icon"><a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                    <span class="nested-group-step">
+                                                GET https://mentutor.altapro.online/mentors/tasks?title=biologi
+                                        </span>
+                                <span class="evidence">
+                                        <span class="piece-of-evidence">
+                    <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-5">
+                            REST Query
+                        </button>
+                    </span>
+                    <!-- Modal -->
+                    <div class="rest-query-details">
+                        <div class="collapse multi-collapse" id="restModal-REST-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Response</h4>
+                                        <p>URL: https://mentutor.altapro.online/mentors/tasks?title=biologi</p>
+                                        <p>Status code: 201</p>
+                                        <p>Content Type: null</p>
+                                        <h4>Request Headers</h4>
+                                        <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZENsYXNzIjo4LCJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTgzMzI5OTgsInJvbGUiOiJtZW50b3IiLCJ1c2VySWQiOjE0fQ.UsC_xCPSv8NbN0h5s1btr4X93kj2_wCK2VpD2n6taAs<br>Accept=*/*</pre>
+                                        <h4>Content Body</h4>
+                                        <pre></pre>
+                                        <h4>Request Cookies</h4>
+                                        <pre></pre>
+                                        <h4>Response Headers</h4>
+                                        <pre>Date: Thu, 26 Oct 2023 13:09:59 GMT<br>Content-Type: application/json; charset=UTF-8<br>Transfer-Encoding: chunked<br>Connection: keep-alive<br>Vary: Origin<br>CF-Cache-Status: DYNAMIC<br>Report-To: {&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https:\/\/a.nel.cloudflare.com\/report\/v3?s=RAl6LHyr6NfG3XqaKEOn0%2FBcvFONJ33QZIqjyGHfsK%2BC9%2FRmTwl0QzSP9Sk3c90L0ZoPFSZ1q1pyE2bI97PxvvMS2enbNq31o6PCpW6aqp6JZAK2lF9rv5MMj0q9GHJbwwE1ga58cxJ9Hg%3D%3D&quot;}],&quot;group&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>NEL: {&quot;success_fraction&quot;:0,&quot;report_to&quot;:&quot;cf-nel&quot;,&quot;max_age&quot;:604800}<br>Server: cloudflare<br>CF-RAY: 81c2efd68b4b1faa-HKG<br>alt-svc: h3=&quot;:443&quot;; ma=86400</pre>
+                                    <h4>Response Body</h4>
+                                        <pre>{<br>    &quot;data&quot;: [<br>        {<br>            &quot;id_task&quot;: 1,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/GzVty89wwuqGuxJWuLL5-MentorUpdateTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 3,<br>            &quot;title&quot;: &quot;bilangan ganjil&quot;,<br>            &quot;description&quot;: &quot;tentukan bilangan ganjil yang prima&quot;,<br>            &quot;images&quot;: &quot;task-bil-ganjil.jpg&quot;,<br>            &quot;file&quot;: &quot;bilangan-ganjil.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 4,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/UCJIQWskDXVOPLMPOzKg-MentorUpdateTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;bilangan-genap.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-05 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 7,<br>            &quot;title&quot;: &quot;WEB Automation&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;* !@#$%^&amp;*&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/Qtj9A7DLfELViqe9EjMg-test2.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/uRCNJBZjRQDz2jk0bwa4-tes2.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 13,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.mkv&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 15,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 16,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 18,<br>            &quot;title&quot;: &quot;!@#$%^&amp;*&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 20,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;1234567890&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 21,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;*()&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 22,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;(algoritmaitusulithinggamembuatpusingkepala.........)&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 24,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.mkv&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 25,<br>            &quot;title&quot;: &quot;Aljabar&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;test1.jpg&quot;,<br>            &quot;file&quot;: &quot;bil_prima.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 26,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Mengenal Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/00w4kpukJAfTHEBv9ycY-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/SLisGqeAmBkGFuERRoDC-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 27,<br>            &quot;title&quot;: &quot;JMeter&quot;,<br>            &quot;description&quot;: &quot;JMeter Mudah&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/KgpDV2dgCazzqgTKXZ0Z-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/19pKaWa428NctihGWMiI-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 29,<br>            &quot;title&quot;: &quot;MENTUTOR&quot;,<br>            &quot;description&quot;: &quot;MENTUTOR AJA YAKAN&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/lwyNq4YBRHJ6bhD1zhRX-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/qSmOaZuyvM2tn2dkUURZ-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 32,<br>            &quot;title&quot;: &quot;MENTUTOR 1&quot;,<br>            &quot;description&quot;: &quot;MENTUTOR AJA YAKAN&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/Xw5RqOJW6jODw8qBzQOO-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/FYTurvhZXakBHpLWX6aF-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 33,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/bsri6XsW0qyBiHNqy3kE-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/AMfY5aCO7zH41jlaMvwF-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 34,<br>            &quot;title&quot;: &quot;Tugas Mayanda&quot;,<br>            &quot;description&quot;: &quot;Menghitung bilangan&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/hCI2KMcW93O8Z7IqpNU9-download.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/X1z7GVmFNI6ub1HqJJs6-tugas_bilangan_cacah2.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-05 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 35,<br>            &quot;title&quot;: &quot;Tugas Mayanda&quot;,<br>            &quot;description&quot;: &quot;Menghitung bilangan&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/FvtGivN3oh2MHvQ3dSMm-download.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/Z96HK14I4x4Y9N9FGYqo-tugas_bilangan_cacah2.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-05 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 37,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/QkASjs2NV2vrIjGPyUuu-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/6KH68Z23wbMe44zvQagt-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 38,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/17ihvB9fCkUU2ehe6gsz-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/QVHNKWfXKXGzxpeXtE4B-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 39,<br>            &quot;title&quot;: &quot;1234567890&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/xDOIdLcu7YGDSn7va0UZ-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/gWpzCL6kB9Wm70CORrTI-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 41,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;1234567890 1234567890&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/nGeB6eXztJhmlt8X3utZ-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/9IginIPf548EFcmM9pS5-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 42,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;*()~-=_+&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/ZZqkdypSGqSi9GnmYXdQ-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/xvKRMrDaziMvjgMszZzq-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 43,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/rL8zHrvjT6MeTjHxLFOC-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/qxYuuwqpUn9VAJY8Zfd2-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 44,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/o8lv9n02rnf31J8VlhKf-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/A0ExjsV35s6xpY5m941B-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 45,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/xvF2yUVsy1f0bNqG1Z9G-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/2pQX2f5DH7drTSgZvS9X-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 46,<br>            &quot;title&quot;: &quot;Coba WEB Manual&quot;,<br>            &quot;description&quot;: &quot;Di Coba WEB&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/tpHlFRlOCKmikAjLjRT4-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/lQPjlzhMOMLFedEAdpgd-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2022-11-05 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 47,<br>            &quot;title&quot;: &quot;COBA WEB MANUAL&quot;,<br>            &quot;description&quot;: &quot;WEB WEB WEB&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/JeSjaP4T94Zb40Qc1d73-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/KL3Pv3mzFnHWiJig5xv5-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 48,<br>            &quot;title&quot;: &quot;COBA WEB MANUAL&quot;,<br>            &quot;description&quot;: &quot;WEB WEB WEB&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/kUdSVcf4NOBsxVzM13xz-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/WPQ15rewIbMGHMGgCotQ-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 57,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 58,<br>            &quot;title&quot;: &quot;123456789&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 61,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;*()&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 62,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 63,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 64,<br>            &quot;title&quot;: &quot;bilangan prima&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 65,<br>            &quot;title&quot;: &quot;123456789&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 66,<br>            &quot;title&quot;: &quot;!@#$%^&amp;*&quot;,<br>            &quot;description&quot;: &quot;algoritma&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 71,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/o4j3VfHjGOcsfLe9ynPv-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/e2gYmrIlHhL7NRzxNjoq-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 74,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;1234567890 1234567890&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/yePWTfplnWnWFJ7YLlmg-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/ow9M45DYNxpNZkBOiRDx-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 75,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;*()~-=_+&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/OUnJT1OMKHDa1d290qh7-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/gvsQyoRwRyU1DSVvgqqs-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 80,<br>            &quot;title&quot;: &quot;Capstone-Mentutor&quot;,<br>            &quot;description&quot;: &quot;Buatlah WEB DAN API Test Case&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/9vNNMS0xSjC4MycCrHvh-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/AZFS1ZgC4JP9JbsV88Wo-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 81,<br>            &quot;title&quot;: &quot;Coba1&quot;,<br>            &quot;description&quot;: &quot;Coba1&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/yxyUvkfSEwHwnVAIihbl-test3.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/sP6JxbI6pJ5XQ0quXf2x-tes3.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 82,<br>            &quot;title&quot;: &quot;Coba2&quot;,<br>            &quot;description&quot;: &quot;Coba2&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/JBbStBVKuD21Sie0pAMP-test3.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/6PmdhKqsbop7alGCJCwH-tes3.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 87,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/Tl9gKoFurO18An9HId7p-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/X8RAzgJTEvF2pslMJt1Q-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 88,<br>            &quot;title&quot;: &quot;1234567890&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/nArYlNoZCqWUmOvVCdzd-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/9VX3KGrcOOJqhZAuhwkX-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 89,<br>            &quot;title&quot;: &quot;!@#$%^&amp;*&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/bP9azFPvOwSDGDZIvkMf-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/MsHQ6RS42QOULNyMmAI3-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 90,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;1234567890 1234567890&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/8i8g1zRIzLuMSFTT5xkl-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/AmdBQIURMtSkcsZx1wRt-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 94,<br>            &quot;title&quot;: &quot;Capstone&quot;,<br>            &quot;description&quot;: &quot;Overwork Project&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/WXzpfxyATa7tj8SERe6p-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/aEzuDZR1requ2bJKoujw-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-22 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 95,<br>            &quot;title&quot;: &quot;Capstone&quot;,<br>            &quot;description&quot;: &quot;Overwork Project&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/CWCY9M79aT7gGn1QCJWG-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/ZovYzgsFWB4jDy2IV4ti-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-22 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 97,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/xdV2Ojp5WNe7GHgdMkN6-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/ig3o8r2zNtVjeAK6FJ6M-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 98,<br>            &quot;title&quot;: &quot;1234567890&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/s83D0bLt75pZKKYHyQsz-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/kK9mMdeVlqWmsCdgpYRv-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 99,<br>            &quot;title&quot;: &quot;!@#$%^&amp;*&quot;,<br>            &quot;description&quot;: &quot;Membuat API Automation&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/L1KXkdIYBE9iHuYnyba4-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/8WWxzJImfMGlsz5c0dtH-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 100,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;1234567890 1234567890&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/zb7DuSbM7YuAXP1fzT4b-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/FCGjUI6KV0YTClgD83tH-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 101,<br>            &quot;title&quot;: &quot;API Automation&quot;,<br>            &quot;description&quot;: &quot;!@#$%^&amp;*()~-=_+&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/2GimrlMPJJi9KxP21vh8-test1.PNG&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/dC953PfgVsyHpsFQGgSu-tes1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-08-25 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 104,<br>            &quot;title&quot;: &quot;TEST&quot;,<br>            &quot;description&quot;: &quot;TRIAL&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/R4YFVTkQfKsvJsl7dE0o-Screenshot 2023-10-08 184217.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/yxdjwkpRn9LwMJjcrwcq-CAREER PATH.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-11-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 105,<br>            &quot;title&quot;: &quot;tugas ke 33&quot;,<br>            &quot;description&quot;: &quot;harap tenang&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/ZAhexLrhTqNo9MQjtr2A-Screenshot (2).png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/LPWuGRLjPdKj0ryJD4mx-mindmap.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 107,<br>            &quot;title&quot;: &quot;coba tugas&quot;,<br>            &quot;description&quot;: &quot;ap aja&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/1ZikfC2O8WQPgZtVjKI5-Screen Shot 2023-08-03 at 21.32.46.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/6Cja8WTmaFbRHVjNn0MD-GLADI WISUDAWAN TP, TNK, TI, BKP, KES.pdf&quot;,<br>            &quot;due_date&quot;: &quot;1945-11-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 108,<br>            &quot;title&quot;: &quot;coba tugas 23&quot;,<br>            &quot;description&quot;: &quot;namku&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/NzaD9MEUvvEznQtcUCY7-Screenshot (1).png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/iSE5MSF2ZmvzNUIV7bC3-GLADI WISUDAWAN JUMAT PP MNA TEKNIK BISNIS.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 113,<br>            &quot;title&quot;: &quot;fisika&quot;,<br>            &quot;description&quot;: &quot;materi&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/oDJ2dCT4BkNQz7wrSV9k-Screenshot 2023-10-08 190351.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/PPFHQ4e6KELwgV1MYWl6-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-22 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 114,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/1be22uVE7GrZXnsfkmct-Screenshot 2023-10-08 185104.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/HlapdMmAWAMFHt2NhrOQ-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 115,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/k3eYwhWDcfTOsKjUKVCD-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/0UdMeylMzT6wJZxDIl2M-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 120,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/uFMKk5NLG7mWLsPnrLIs-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/Ep8hOIh35Bscs8ejMvoz-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 122,<br>            &quot;title&quot;: &quot;tugas mtk baru&quot;,<br>            &quot;description&quot;: &quot;ini percobaan ku aja\r\n&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/Fj6PwJgJJ9fkVTtigutC-Screenshot (2).png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/Bu25SLCvfJAfPCI6MAOi-laporan aji1.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 123,<br>            &quot;title&quot;: &quot;cobab 2 &quot;,<br>            &quot;description&quot;: &quot;asdasdasda&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/mDUIMmJeJ4TvHtGMVKjx-Screenshot (1).png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/mxKYPrrvbXXRLWUCikqa-5_LAPORAN TUTORIAL SKENARIO 2 BLOK 20.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 124,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/DB2xOZ8oGKxtcVfZldm0-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/rMsKDqcuCLJQKFr2YKIO-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 125,<br>            &quot;title&quot;: &quot;coba 3&quot;,<br>            &quot;description&quot;: &quot;asdasdasda&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/Xap4WGgjtFqtvkTbpdwB-Screenshot (1).png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/fAevkW6rbUVS9IiUUV86-5_LAPORAN TUTORIAL SKENARIO 2 BLOK 20.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 126,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/NtHDzbjx85CQC3yxvhro-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/hY7I1N6EqfgJcHXejtTq-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 127,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/WxpVfmL8pYk07kEN4iwD-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/jtWQMuGWBIFUyWnfzBQh-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 128,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/ZpYwfyz1R0GNQTkEslkM-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/eqYICOkmxLERIlavsoDv-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 129,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/HIqX1zThkBi2y4yUrrIv-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/ugEoaOGbAaXAmwKIBze5-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 130,<br>            &quot;title&quot;: &quot;materi&quot;,<br>            &quot;description&quot;: &quot;tugas 3&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-09-28 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 131,<br>            &quot;title&quot;: &quot;materi&quot;,<br>            &quot;description&quot;: &quot;tugas 3&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-09-28 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 132,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/USn9EFz1OjKd4G1KNmYy-Screenshot 2023-08-23 150213.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/X00vKNIM5FWJIxmeI8uN-3. Tugas Menyusun Surat Lamaran Pekerjaan.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 133,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 134,<br>            &quot;title&quot;: &quot;materi&quot;,<br>            &quot;description&quot;: &quot;tugas 3&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-09-28 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 135,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 136,<br>            &quot;title&quot;: &quot;materi&quot;,<br>            &quot;description&quot;: &quot;tugas 3&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-09-28 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 137,<br>            &quot;title&quot;: &quot;tugas ke 5&quot;,<br>            &quot;description&quot;: &quot;asfdafaf&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/bNbVB5JSxwHwOP9QT42r-download.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/W2hlRONljgDhSxNb6leP-FIX_LAPORAN_NASRUL11.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 138,<br>            &quot;title&quot;: &quot;tugas ke 6&quot;,<br>            &quot;description&quot;: &quot;asfdafaf&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/rYo8kMEDaviEi3jRCyZh-download.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/BWsqVBsNHk2Ofa9j7hJW-FIX_LAPORAN_NASRUL11.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 139,<br>            &quot;title&quot;: &quot;tugas ke 6&quot;,<br>            &quot;description&quot;: &quot;asfdafaf&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/JvN7qdZp12mPM2dBBamo-download.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/PBYklBfaIyLLCsaREkj9-FIX_LAPORAN_NASRUL11.pdf&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-30 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 140,<br>            &quot;title&quot;: &quot;ips&quot;,<br>            &quot;description&quot;: &quot;sosial&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-10-21 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 141,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/qSV6JZETsaWwyFcBDn1n-MentorUpdateTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/TYE2TFh2GMlMzNcgh303-MentorPostTask.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 142,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/ygjAjIbB15nE4wwqvCMs-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/FfwEgjTLr8BUAwpSxYEH-MentorPostTask.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 143,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/kL6GuaXOkpK8ebUKNuGL-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 144,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/pMn6qCKtcclFGkd0QCfT-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 145,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/E5uErCJMUvSKkpseZT15-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/XAcQyE63YdcScKME6UG1-MentorPostTask.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 146,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/vv6tsbg4hv7XfreZJnjT-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 147,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/zktovjI7EPON80GMLoD2-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/mfXZabhw99IpXd4a3ujk-MentorPostTask.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 148,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-imagestask-images/gNOhgwDJpbrxPr4AbVo3-MentorPostTaskPetapng.png&quot;,<br>            &quot;file&quot;: &quot;&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        },<br>        {<br>            &quot;id_task&quot;: 149,<br>            &quot;title&quot;: &quot;sosial&quot;,<br>            &quot;description&quot;: &quot;tugas&quot;,<br>            &quot;images&quot;: &quot;&quot;,<br>            &quot;file&quot;: &quot;https://storage.googleapis.com/altabucket/mentutor/task-filetask-file/XmgqdRolYuHcMMsWb9Gc-MentorPostTask.docx&quot;,<br>            &quot;due_date&quot;: &quot;2023-12-12 23:59 UTC&quot;<br>        }<br>    ],<br>    &quot;message&quot;: &quot;Success get all task&quot;<br>}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                        </span>
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                        <td width="100"><span class="nested-group-step"></span></td>
+                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    <tr class="test-FAILURE">
+
+                        <td width="50" class="step-icon">
+                            <a name="2"></a>
+                                <span style="margin-left: 20px;"
+                                      class="top-level-icon"><a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                </span>
+                        </td>
+
+                        <td class="step-description-column">
+                            <div class="step-description">
+                                    <span class="top-level-step">
+                                                Then response code mentor should be 200
+                                        </span>
+                                <span class="evidence">
+                                </span>
+                            </div>
+                        </td>
+
+                        <td width="130"><span class="top-level-step">FAILURE</span></td>
+                        <td width="100"><span class="top-level-step">005ms</span></td>
+                    </tr>
+                        <tr class="test-FAILURE">
+                            <td width="40">&nbsp</td>
+                            <td width="%" colspan="3" class="error-message-cell">
+
+
+    <div style="display:block">
+        <div class="table">
+            <div class="row">
+                <div class="col-sm-10" style="padding-left:1.5em; padding-top:0.5em; padding-bottom:0.5em;">
+                    <span class="error-message error-message-title">java.lang.AssertionError: 1 expectation failed.<br>Expected status code &lt;200&gt; but was &lt;201&gt;.<br></span>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-warning details-button" data-toggle="collapse" href="#stacktraceModal-6""
+                       role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="far fa-eye"></i> More details</a>
+                </div>
+             </div>
+        </div>
+    <div>
+
+    <!-- Details Section -->
+    <div class="row stacktrace-details">
+      <div class="col">
+        <div class="collapse multi-collapse" id="stacktraceModal-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>java.lang.AssertionError </h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <pre>io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)<br />io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)<br />io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)<br />io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)<br />io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy:-1)<br />groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)<br />groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1267)<br />io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)<br />io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:-1)<br />stepdef.MentorStepDef.responseCodeMentorShouldBe(MentorStepDef.java:185)<br />✽.response code mentor should be 200(classpath:features/Mentutor/mentor.feature:20)<br /></pre>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+                            </td>
+                        </tr>
+                <tr class="test-FAILURE">
+                        <td colspan="2"></td>
+                    <td width="130"><span class="top-level-step"><em>FAILURE</em></span></td>
+                    <td width="100"><span class="top-level-step"><em>4.49s</em></span></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <div id="beforefooter"></div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="version">Serenity BDD version 2.4.51</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function toggleDiv(divId) {
+            $("#" + divId).toggle();
+            var imgsrc = $(".img" + divId).attr('src');
+            if (imgsrc == 'images/plus.png') {
+                $(".img" + divId).attr("src", function () {
+                    return "images/minus.png";
+                });
+
+            } else {
+                $(".img" + divId).attr("src", function () {
+                    return "images/plus.png";
+                });
+            }
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+
+        $(document).ready(function () {
+            $('img.screenshot').imgPreview({
+                imgCSS: {
+                    width: '500px'
+                },
+                distanceFromCursor: {top: 10, left: -200}
+            });
+        });
+
+        //]]>
+    </script>
+    <div id="imgPreviewContainer" style="position: absolute; top: 612px; left: 355px; display: none; " class=""><img
+                src="" style="display: none; "></div>
+    <div id="imgPreviewContainer2" style="position: absolute; top: 925px; left: 320px; display: none; " class="">
+        <img style="width: 200px; display: none; " src=""></div>
+    <div id="imgPreviewWithStyles" style="position: absolute; top: 1272px; left: 321px; display: none; " class="">
+        <img style="height: 200px; opacity: 1; display: none; " src=""></div>
+    <div id="imgPreviewWithStyles2" style="display: none; position: absolute; "><img style="height: 200px; "></div>
+    <div id="imgPreviewWithStyles3" style="display: none; position: absolute; "><img style="height: 200px; "></div>
+
+</div>
+</body>
+</html>
