@@ -1,4 +1,4 @@
-@FULL
+@MENTUTOR
 Feature: login on mentutor web
 
   @POSTLOGIN

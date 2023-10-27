@@ -6,7 +6,7 @@ import starter.utils.ConstantForum;
 
 import java.io.File;
 
-public class TokenMentee {
+public class TokenForum {
     String token;
 
     public void login(String bodyFile){

@@ -8,7 +8,7 @@ import starter.utils.ConstantForum;
 
 import java.io.File;
 
-public class ForumMentutorAPI extends TokenMentee {
+public class ForumMentutorAPI extends TokenForum {
     public static String GET_ALL_STATUS = ConstantForum.BASE_URL + "/{PATH}";
     public static String POST_FORUM = ConstantForum.BASE_URL + "/forum";
 

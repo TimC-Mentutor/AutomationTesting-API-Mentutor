@@ -22,7 +22,7 @@ public class ForumStepDef {
 //CASE 1
     @Given("The right authentication")
     public void theRightAuthentication() {
-        forumMentutorAPI.login("loginMentee.json");
+        forumMentutorAPI.login("loginForum.json");
     }
 
     @And("I have a valid authentication token and valid path {string}")
@@ -49,7 +49,7 @@ public class ForumStepDef {
 //CASE 2
     @Given("I have a valid authentication token and invalid path {string}")
     public void iHaveAValidAuthenticationTokenAndInvalidPath(String path) {
-        forumMentutorAPI.login("loginMentee.json");
+        forumMentutorAPI.login("loginForum.json");
         forumMentutorAPI.accessForumWithAuthToken(path);
     }
 

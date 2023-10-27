@@ -1,6 +1,5 @@
-Feature:
-
-  @GETALLSTATUS
+@MENTUTOR
+Feature: FORUM
 #    POSITIVE
   Scenario: Get all Status with valid path
     Given The right authentication
