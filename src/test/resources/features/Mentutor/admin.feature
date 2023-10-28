@@ -152,14 +152,103 @@ Feature: Admin
   #put update user
   @Admin @Mentutor
   @Positive-Case
-  Scenario: Put update user with valid id
-    Given Put update with valid id 134 and body to name "Bhakti UGP" email "bhakt11@gmail.com" password "BhaktiU123$" images "putUpdateAdmin.png" id_class 1
+  Scenario: Put update user with valid id and body
+    Given Put update with valid id and body to name "Bhakti UGP" email "bhakt11@gmail.com" password "BhaktiU123$" images "putUpdateAdmin.png" id_class 1
+    When Send put update
+    Then Response code admin should be 201 Created
+    And Put update user response body contain "update profile successful"
+    And Validate put update user JSON schema "PutUpdateUserSchema.json"
+  @Admin @Mentutor
+  @Positive-Case
+  Scenario: Put update user with name value more than 5 characters
+    Given Put update with name value more than five characters name "Bhakti UGP" email "bhakt11@gmail.com" password "BhaktiU123$" images "putUpdateAdmin.png" id_class 1
     When Send put update
     Then Response code admin should be 201 Created
     And Put update user response body contain "update profile successful"
     And Validate put update user JSON schema "PutUpdateUserSchema.json"
 
+  @Admin @Mentutor
+  @Negative-Case
+  Scenario Outline: Put update user with invalid id
+    Given Put update user with invalid id <id>
+    When Send put update user fail
+    Then Response code admin should be 400 Bad Request
+    And Validate put update user JSON schema "PutUpdateUserFailedSchema.json"
+    Examples:
+      | id   |
+      | 1340 |
+  @Admin @Mentutor
+  @Negative-Case
+  Scenario Outline: Put update user blank request body
+    Given Put update user with blank id <id> request body "PutUpdateUserFail.json"
+    When Send put update user fail
+    Then Response code admin should be 400 Bad Request
+    And Validate put update user JSON schema "PutUpdateUserFailedSchema.json"
+    Examples:
+      | id |
+      | 83 |
+  @Admin @Mentutor
+  @Negative-Case
+  Scenario: Put update user with name value less than 5 characters
+    Given Put update user with name value less than five characters name "Bhak" email "bhakt11@gmail.com" password "BhaktiU123$" images "putUpdateAdmin.png" id_class 1
+    When Send put update user failed
+    Then Response code admin should be 400 Bad Request
+    And Validate put update user JSON schema "PutUpdateUserFailedSchema.json"
 
+  #put update class
+  @Admin @Mentutor
+  @Positive-Case
+  Scenario Outline: Put update class with valid id and request body
+    Given Put update class with valid id <id> and request body "PutUpdateClass.json"
+    When Send put update class
+    Then Response code admin should be 201 Created
+    And Put update class response body contain "Update Class Successful"
+    And Validate put update class JSON schema "PutUpdateClassSchema.json"
+    Examples:
+      | id |
+      | 44  |
+  @Admin @Mentutor
+    @Positive-Case
+  Scenario Outline: Put update class with valid id and class name value more than 5 characters
+    Given Put update class with valid id <id> and class name value more than five characters "PutUpdateClass.json"
+    When Send put update class
+    Then Response code admin should be 201 Created
+    And Put update class response body contain "Update Class Successful"
+    And Validate put update class JSON schema "PutUpdateClassSchema.json"
+    Examples:
+      | id |
+      | 44  |
+
+  @Admin @Mentutor
+    @Negative-Case
+  Scenario Outline: Put update class with invalid id and valid request body
+    Given Put update class with invalid id <id> and valid request body "PutUpdateClass.json"
+    When Send put update class fail
+    Then Response code admin should be 400 Bad Request
+    And Validate put update class JSON schema "PutUpdateUserFailedSchema.json"
+    Examples:
+      | id  |
+      | 440 |
+  @Admin @Mentutor
+  @Negative-Case
+  Scenario Outline: Put update class with valid id and invalid request body
+    Given Put update class with valid id <id> and invalid request body "PutUpdateClassFail.json"
+    When Send put update class fail
+    Then Response code admin should be 400 Bad Request
+    And Validate put update class JSON schema "PutUpdateUserFailedSchema.json"
+    Examples:
+      | id |
+      | 44 |
+  @Admin @Mentutor
+    @Negative-Case
+  Scenario Outline: Put update class with valid id and class name value less than 5 characters
+    Given Put update class with valid id <id> and class name value less than five characters "PutUpdateClassFail.json"
+    When Send put update class fail
+    Then Response code admin should be 400 Bad Request
+    And Validate put update class JSON schema "PutUpdateUserFailedSchema.json"
+    Examples:
+      | id |
+      | 44 |
 
 
 #-----------------------------------------------#

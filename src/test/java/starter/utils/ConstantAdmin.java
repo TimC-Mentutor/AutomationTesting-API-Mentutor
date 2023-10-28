@@ -21,7 +21,9 @@ public class ConstantAdmin {
     public static String GET_JSON_SCHEMA = DIR + "/src/test/resources/JSON/JSONSchema/";
 
     //put
-    public static String UPDATE_USER_ID = BASE_URL + "/admin/users/{id}}";
+    public static String UPDATE_USER_ID = BASE_URL + "/admin/users/134";
+    public static String UPDATE_USER_INVALIDID = BASE_URL + "/admin/users/{id}";
+    public static String UPDATE_USER_BLANKID = BASE_URL + "/admin/users/{83}";
     public static String UPDATE_CLASS_ID = BASE_URL + "/admin/classes/{id}";
     public static String UPDATE_JSON_SCHEMA = DIR + "/src/test/resources/JSON/JSONSchema/";
 

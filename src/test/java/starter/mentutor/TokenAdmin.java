@@ -9,7 +9,7 @@ public class TokenAdmin {
         String token;
 
         public void login(String bodyFile){
-            File jsonFile = new File(ConstantAdmin.UPDATE_USER_ID+bodyFile);
+            File jsonFile = new File(ConstantAdmin.REGISTER_REQ_BODY+bodyFile);
             this.token = SerenityRest.given()
                     .contentType(ContentType.JSON)
                     .body(jsonFile)

@@ -68,13 +68,12 @@ public class AdminMentutorAPI extends TokenAdmin {
 
     //put update user
     @Step("Put update user")
-    public void putUpdateUser(int id_user,String name,
+    public void putUpdateUser(String name,
                      String email,String password,
                      File images,int id_class){
         SerenityRest.given()
                 .header("Authorization", "Bearer " + getToken())
-                .pathParam("id_user", id_user)
-//                .contentType("multipart/form-data")
+                .contentType("multipart/form-data")
                 .multiPart("name", name)
                 .multiPart("email", email)
                 .multiPart("password", password)
@@ -82,14 +81,40 @@ public class AdminMentutorAPI extends TokenAdmin {
                 .multiPart("id_class", id_class);
     }
 
-    //put update class
-    @Step("Put update class")
-    public void putUpdateClass(String authToken, File imageFile, String caption) {
+    @Step("Put update users invalid")
+    public void putUpdateUsersInvalid(int id) {
         SerenityRest.given()
                 .header("Authorization", "Bearer " + getToken())
-                .contentType("multipart/form-data")
-                .multiPart("images", imageFile)
-                .multiPart("caption",caption);
+                .contentType(ContentType.JSON)
+                .pathParam("id", id);
+    }
+//    @Step("Put update users blank")
+//    public void putUpdateUsersBlank(int id, File json) {
+//        SerenityRest.given()
+//                .header("Authorization", "Bearer " + getToken())
+//                .contentType(ContentType.JSON)
+//                .pathParam("id", id)
+//                .body(json);
+//    }
+//put update class
+@Step("Put update users blank")
+public void putUpdateUsersBlank(int id, File json) {
+    SerenityRest.given()
+            .header("Authorization", "Bearer " + getToken())
+            .contentType(ContentType.JSON)
+            .pathParam("id", id)
+            .body(json);
+}
+
+
+    //put update class
+    @Step("Put update class")
+    public void putUpdateClass(int id, File json) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + getToken())
+                .contentType(ContentType.JSON)
+                .pathParam("id", id)
+                .body(json);
     }
 
     //delete user
