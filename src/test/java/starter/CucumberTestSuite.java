@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         features = "classpath:features",
-        tags = "@Admin",
-        glue = "stepdef"
+        tags = "@MENTUTOR",
+        glue = {"stepdef"}
 )
 public class CucumberTestSuite {}
