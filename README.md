@@ -7,7 +7,7 @@
 
 ## Link Test Case Manual.
 <div>
-<a href="https://docs.google.com/spreadsheets/d/1-UBcJ7PRdc6-rwiqy2UvnuceNfAs9-zzEyxWAIcFA8Y/edit#gid=1081421487" target="blank"><img src="https://img.shields.io/badge/-Test%20Scenario-181717?style=for-the-badge&logo=microsoft-excel&color=121B4F&logoColor=white" /></a>
+<a href="https://docs.google.com/spreadsheets/d/112BTHzntiOeodGzL3cI8p_8gOUZZBaHNsRkt0Kauexw/edit#gid=0" target="blank"><img src="https://img.shields.io/badge/-Test%20Scenario-181717?style=for-the-badge&logo=microsoft-excel&color=121B4F&logoColor=white" /></a>
 <a href="https://docs.google.com/presentation/d/1nPFZad7D1vlXkHDafPNE7DXlvN22LFyRdqorhA2auXo/edit#slide=id.p1" target="blank"><img src="https://img.shields.io/badge/-Presentation%20MentutorApp-181717?style=for-the-badge&logo=microsoft-PowerPoint&color=121B4F&logoColor=white" /></a>
 <a href="https://app.swaggerhub.com/apis-docs/NURFATUROHMAN28/Mentutor/1.0.0#/" target="blank"><img src="https://img.shields.io/badge/-API%20Documentation-181717?style=for-the-badge&logo=swagger&color=121B4F&logoColor=white" /></a>
 
@@ -15,10 +15,10 @@
 ## Report Test Overall.
 
 
-## Coverage Every Features (optional).
+## Coverage Every Features.
 
 </div>
-## Tools & Technology Stack.
+<h2> Tools & Technology Stack. </h2>
 <div>
 <p>Manual Testing</p>
       <a><img src="https://img.shields.io/badge/-Postman-181717?style=for-the-badge&logo=postman&color=121B4F&logoColor=white"></a>
@@ -54,6 +54,6 @@ $ mvn clean verify
 </div>
 
 ## Team C Member :
-* [Alfian Septy Chandra](https://github.com/Ryouta021) <br> [![GitHub](https://img.shields.io/badge/alfiansepty-chandra-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alfianadityads)
-* [Binti Nayla Wafiroh](https://github.com/inaylalala) <br> [![GitHub](https://img.shields.io/badge/bintinayla-wafiroh-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/faruqiizu)
-* [Izzuddin Faruqi](https://github.com/faruqiizu) <br> [![GitHub](https://img.shields.io/badge/izzuddin-faruqi-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fathiyahrr)
+* [Alfian Septy Chandra](https://github.com/Ryouta021) <br> [![GitHub](https://img.shields.io/badge/Ryouta021-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Ryouta021)
+* [Binti Nayla Wafiroh](https://github.com/inaylalala) <br> [![GitHub](https://img.shields.io/badge/inaylalala-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/inaylalala)
+* [Izzuddin Faruqi](https://github.com/faruqiizu) <br> [![GitHub](https://img.shields.io/badge/faruqiizu-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/faruqiizu)
