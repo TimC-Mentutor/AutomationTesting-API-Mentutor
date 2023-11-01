@@ -15,9 +15,10 @@ About MENTUTOR APP
 
 
 ## Report Test Overall.
-
+<img width="60%" src="./src/test/resources/Images/report1.jpg"><br/>
 
 ## Coverage Every Features.
+<img width="60%" src="./src/test/resources/Images/report2.jpg"><br/>
 
 </div>
 <h2> Tools & Technology Stack. </h2>
