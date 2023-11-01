@@ -1,7 +1,9 @@
 # AutomationTesting-API-Mentutor
-</div>
 
-## About MENTUTOR APP
+<div align="left">
+<img width="60%" src="./src/test/resources/Images/mentutorappss.png"><br/>
+<summary><h1 style="display-inline:block">MENTUTOR APP</h1></summary>
+About MENTUTOR APP
 "Mentutor is present as a place for teachers to monitor their students both from collecting assignments and by discussing with students through the available forums"
 
 
