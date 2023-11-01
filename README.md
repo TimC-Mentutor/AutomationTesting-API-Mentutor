@@ -14,10 +14,7 @@ About MENTUTOR APP
 <a href="https://app.swaggerhub.com/apis-docs/NURFATUROHMAN28/Mentutor/1.0.0#/" target="blank"><img src="https://img.shields.io/badge/-API%20Documentation-181717?style=for-the-badge&logo=swagger&color=121B4F&logoColor=white" /></a>
 
 
-## Report Test Overall.
-<img width="60%" src="./src/test/resources/Images/report1.jpg"><br/>
-
-## Coverage Every Features.
+## Report Test Overall and Coverage Every Features.
 <img width="60%" src="./src/test/resources/Images/report2.jpg"><br/>
 
 </div>
